@@ -1,7 +1,6 @@
 // KAGE engine sample script for JavaScript engine
 //
-// % js sample.js > result.svg (SpiderMonkey)
-// % java -jar js.jar sample.js > result.svg (Rhino)
+// % node sample.js > result.svg # (Node.js)
 
 const { Kage } = require("./kage");
 const { Polygons } = require("./polygons");
