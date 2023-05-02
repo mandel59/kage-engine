@@ -185,7 +185,7 @@ function get_candidate(kage, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4
       ib = ib * -1;
     }
 
-    temp = new Array(2);
+    var temp = new Array(2);
     temp[0] = x - ia;
     temp[1] = y - ib;
     curve[0].push(temp);

@@ -15,9 +15,10 @@ class Polygon {
   }
   // method
   push(x, y, off) {
-    var temp = new Object();
-    temp.x = Math.floor(x * 10) / 10;
-    temp.y = Math.floor(y * 10) / 10;
+    var temp = {
+      x: Math.floor(x * 10) / 10,
+      y: Math.floor(y * 10) / 10,
+    };
     if (off != 1) {
       off = 0;
     }
@@ -42,9 +43,10 @@ class Polygon {
     this.array.shift();
   }
   unshift(x, y, off) {
-    var temp = new Object();
-    temp.x = Math.floor(x * 10) / 10;
-    temp.y = Math.floor(y * 10) / 10;
+    var temp = {
+      x: Math.floor(x * 10) / 10,
+      y: Math.floor(y * 10) / 10,
+    };
     if (off != 1) {
       off = 0;
     }
