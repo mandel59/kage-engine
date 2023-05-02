@@ -1,10 +1,12 @@
 // Reference : http://www.cam.hi-ho.ne.jp/strong_warriors/teacher/chapter0{4,5}.html
 
-function point(x, y) {
-  this.x = x;
-  this.y = y;
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 }
-exports.point = point;
+exports.Point = Point;
 
 function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
   var a1 = y12 - y11;
@@ -18,7 +20,7 @@ function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
   if (temp == 0) { // parallel
     return false;
   }
-  return new point((c1 * b2 - c2 * b1) / temp, (a1 * c2 - a2 * c1) / temp);
+  return new Point((c1 * b2 - c2 * b1) / temp, (a1 * c2 - a2 * c1) / temp);
 }
 exports.getCrossPoint = getCrossPoint;
 

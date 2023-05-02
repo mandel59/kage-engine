@@ -1,26 +1,24 @@
-function Buhin(number) {
-  // property
-  this.hash = {};
+class Buhin {
+  constructor(number) {
+    // property
+    this.hash = {};
 
-  // initialize
-  // no operation
-
-  return this;
-}
-
-// method
-function set(name, data) { // void
-  this.hash[name] = data;
-}
-Buhin.prototype.push = set;
-Buhin.prototype.set = set;
-
-function search(name) { // string
-  if (this.hash[name]) {
-    return this.hash[name];
+    // initialize
+    // no operation
+    return this;
   }
-  return ""; // no data
+  // method
+  push(name, data) {
+    this.hash[name] = data;
+  }
+  set(name, data) {
+    this.hash[name] = data;
+  }
+  search(name) {
+    if (this.hash[name]) {
+      return this.hash[name];
+    }
+    return ""; // no data
+  }
 }
-Buhin.prototype.search = search;
-
 exports.Buhin = Buhin;
