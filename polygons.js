@@ -117,3 +117,5 @@ function generateEPS() { // string
   return buffer;
 }
 Polygons.prototype.generateEPS = generateEPS;
+
+exports.Polygons = Polygons;

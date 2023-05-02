@@ -36,6 +36,7 @@ function divide_curve(kage, x1, y1, sx1, sy1, x2, y2, curve, div_curve, off_curv
   off_curve[1][4] = x2;
   off_curve[1][5] = y2;
 }
+exports.divide_curve = divide_curve
 
 // ------------------------------------------------------------------
 function find_offcurve(kage, curve, sx, sy, result) {
@@ -123,6 +124,7 @@ function find_offcurve(kage, curve, sx, sy, result) {
   result[5] = ny2;
   result[6] = mindiff;
 }
+exports.find_offcurve = find_offcurve;
 
 // ------------------------------------------------------------------
 function get_candidate(kage, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4) {
@@ -193,3 +195,4 @@ function get_candidate(kage, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4
     curve[1].push(temp);
   }
 }
+exports.get_candidate = get_candidate;

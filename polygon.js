@@ -64,3 +64,5 @@ function unshift(x, y, off) { // void
   this.array.unshift(temp);
 }
 Polygon.prototype.unshift = unshift;
+
+exports.Polygon = Polygon;

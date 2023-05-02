@@ -22,3 +22,5 @@ function search(name) { // string
   return ""; // no data
 }
 Buhin.prototype.search = search;
+
+exports.Buhin = Buhin;

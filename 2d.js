@@ -4,6 +4,7 @@ function point(x, y) {
   this.x = x;
   this.y = y;
 }
+exports.point = point;
 
 function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
   var a1 = y12 - y11;
@@ -19,6 +20,7 @@ function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
   }
   return new point((c1 * b2 - c2 * b1) / temp, (a1 * c2 - a2 * c1) / temp);
 }
+exports.getCrossPoint = getCrossPoint;
 
 function isCross(x11, y11, x12, y12, x21, y21, x22, y22) { // boolean
   var temp = getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22);
@@ -39,6 +41,7 @@ function isCross(x11, y11, x12, y12, x21, y21, x22, y22) { // boolean
   }
   return true;
 }
+exports.isCross = isCross;
 
 function isCrossBox(x1, y1, x2, y2, bx1, by1, bx2, by2) { // boolean
   if (isCross(x1, y1, x2, y2, bx1, by1, bx2, by1)) { return true; }
@@ -88,6 +91,7 @@ function isCrossBoxWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
   }
   return false;
 }
+exports.isCrossBoxWithOthers = isCrossBoxWithOthers;
 
 function isCrossWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
   for (var j = 0; j < strokesArray.length; j++) {
@@ -129,3 +133,4 @@ function isCrossWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
   }
   return false;
 }
+exports.isCrossWithOthers = isCrossWithOthers;

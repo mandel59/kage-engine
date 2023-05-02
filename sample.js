@@ -3,14 +3,8 @@
 // % js sample.js > result.svg (SpiderMonkey)
 // % java -jar js.jar sample.js > result.svg (Rhino)
 
-load("2d.js");
-load("buhin.js");
-load("curve.js");
-load("kage.js");
-load("kagecd.js");
-load("kagedf.js");
-load("polygon.js");
-load("polygons.js");
+const { Kage } = require("./kage");
+const { Polygons } = require("./polygons");
 
 var kage = new Kage();
 var polygons = new Polygons();
@@ -21,5 +15,4 @@ kage.kBuhin.push("u26c29-07", "1:0:0:18:29:187:29$1:0:0:73:10:73:48$1:0:0:132:10
 
 kage.makeGlyph(polygons, "u6f22");
 
-print(polygons.generateSVG(false));
-
+console.log(polygons.generateSVG(false));

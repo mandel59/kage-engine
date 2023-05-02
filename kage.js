@@ -1,3 +1,8 @@
+const { isCrossWithOthers, isCrossBoxWithOthers } = require("./2d");
+const { Buhin } = require("./buhin");
+const { dfDrawFont } = require("./kagedf");
+const { Polygons } = require("./polygons");
+
 function Kage(size) {
   //properties
   this.kShotai = this.kMincho;
@@ -421,3 +426,5 @@ Kage.prototype.stretch = stretch;
 
 Kage.prototype.kMincho = 0;
 Kage.prototype.kGothic = 1;
+
+exports.Kage = Kage;

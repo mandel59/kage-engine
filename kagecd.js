@@ -1,3 +1,7 @@
+const { get_candidate, divide_curve, find_offcurve } = require("./curve");
+const { Kage } = require("./kage");
+const { Polygon } = require("./polygon");
+
 function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, ta2) {
   var rad, t;
   var x, y, v;
@@ -803,14 +807,17 @@ function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, t
     polygons.push(poly);
   }
 }
+exports.cdDrawCurveU = cdDrawCurveU;
 
 function cdDrawBezier(kage, polygons, x1, y1, x2, y2, x3, y3, x4, y4, a1, a2) {
   cdDrawCurveU(kage, polygons, x1, y1, x2, y2, x3, y3, x4, y4, a1, a2);
 }
+exports.cdDrawBezier = cdDrawBezier;
 
 function cdDrawCurve(kage, polygons, x1, y1, x2, y2, x3, y3, a1, a2) {
   cdDrawCurveU(kage, polygons, x1, y1, x2, y2, x2, y2, x3, y3, a1, a2);
 }
+exports.cdDrawCurve = cdDrawCurve;
 
 function cdDrawLine(kage, polygons, tx1, ty1, tx2, ty2, ta1, ta2) {
   var rad;
@@ -1338,3 +1345,4 @@ function cdDrawLine(kage, polygons, tx1, ty1, tx2, ty2, ta1, ta2) {
     }
   }
 }
+exports.cdDrawLine = cdDrawLine;

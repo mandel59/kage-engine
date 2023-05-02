@@ -1,3 +1,5 @@
+const { cdDrawLine, cdDrawCurve, cdDrawBezier } = require("./kagecd");
+
 function dfDrawFont(kage, polygons, a1, a2, a3, x1, y1, x2, y2, x3, y3, x4, y4) {
   var tx1, tx2, tx3, tx4, ty1, ty2, ty3, ty4, v;
   var rad;
@@ -538,3 +540,4 @@ function dfDrawFont(kage, polygons, a1, a2, a3, x1, y1, x2, y2, x3, y3, x4, y4) 
     }
   }
 }
+exports.dfDrawFont = dfDrawFont;
