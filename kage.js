@@ -89,29 +89,6 @@ class Kage {
       }
     }
   }
-  makeGlyph3(data) {
-    var result = new Array();
-    if (data != "") {
-      var strokesArray = this.adjustKirikuchi(this.adjustUroko2(this.adjustUroko(this.adjustKakato(this.adjustTate(this.adjustMage(this.adjustHane(this.getEachStrokes(data))))))));
-      for (var i = 0; i < strokesArray.length; i++) {
-        var polygons = new Polygons();
-        dfDrawFont(this, polygons,
-          strokesArray[i][0],
-          strokesArray[i][1],
-          strokesArray[i][2],
-          strokesArray[i][3],
-          strokesArray[i][4],
-          strokesArray[i][5],
-          strokesArray[i][6],
-          strokesArray[i][7],
-          strokesArray[i][8],
-          strokesArray[i][9],
-          strokesArray[i][10]);
-        result.push(polygons);
-      }
-    }
-    return result;
-  }
   getEachStrokes(glyphData) {
     var strokesArray = new Array();
     var strokes = glyphData.split("$");
