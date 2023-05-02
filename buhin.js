@@ -2,7 +2,8 @@ class Buhin {
   constructor() {
     // property
     /** @type {Record<string, string>} */
-    this.hash = {};
+    // set __proto__ to null to avoid prototype pollution
+    this.hash = { __proto__: null };
 
     // initialize
     // no operation
