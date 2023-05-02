@@ -416,19 +416,17 @@ function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, t
   var XX, XY, YX, YY;
   var poly, poly2;
   var hosomi;
-  var kMinWidthT, kMinWidthT2;
-  var a1, a2, opt1, opt2, opt3, opt4;
+
+  const a1 = ta1 % 1000;
+  const a2 = ta2 % 100;
+  const opt1 = Math.floor((ta1 % 10000) / 1000);
+  const opt2 = Math.floor((ta2 % 1000) / 100);
+  const opt3 = Math.floor(ta1 / 10000);
+  const opt4 = Math.floor(ta2 / 1000);
 
   if (kage.kShotai == kage.kMincho) { // mincho
-    a1 = ta1 % 1000;
-    a2 = ta2 % 100;
-    opt1 = Math.floor((ta1 % 10000) / 1000);
-    opt2 = Math.floor((ta2 % 1000) / 100);
-    opt3 = Math.floor(ta1 / 10000);
-    opt4 = Math.floor(ta2 / 1000);
-
-    kMinWidthT = kage.kMinWidthT - opt1 / 2;
-    kMinWidthT2 = kage.kMinWidthT - opt4 / 2;
+    const kMinWidthT = kage.kMinWidthT - opt1 / 2;
+    const kMinWidthT2 = kage.kMinWidthT - opt4 / 2;
 
     switch (a1 % 100) {
       case 0:
