@@ -5,6 +5,9 @@ const { Polygon } = require("./polygon");
 const { Polygons } = require("./polygons");
 
 class Kage {
+  /**
+   * @param {number} [size]
+   */
   constructor(size) {
     //properties
     this.kShotai = this.kMincho;
@@ -66,10 +69,18 @@ class Kage {
     return this;
   }
   // method
+  /**
+   * @param {Polygons} polygons
+   * @param {string} buhin
+   */
   makeGlyph(polygons, buhin) {
     var glyphData = this.kBuhin.search(buhin);
     this.makeGlyph2(polygons, glyphData);
   }
+  /**
+   * @param {Polygons} polygons
+   * @param {string} data
+   */
   makeGlyph2(polygons, data) {
     if (data != "") {
       var strokesArray = this.adjustKirikuchi(this.adjustUroko2(this.adjustUroko(this.adjustKakato(this.adjustTate(this.adjustMage(this.adjustHane(this.getEachStrokes(data))))))));
@@ -89,43 +100,58 @@ class Kage {
       }
     }
   }
+  /**
+   * @param {string} glyphData
+   * @returns {number[][]}
+   */
   getEachStrokes(glyphData) {
     var strokesArray = new Array();
     var strokes = glyphData.split("$");
     for (var i = 0; i < strokes.length; i++) {
       var columns = strokes[i].split(":");
-      if (Math.floor(columns[0]) != 99) {
+      if (Math.floor(Number(columns[0])) != 99) {
         strokesArray.push([
-          Math.floor(columns[0]),
-          Math.floor(columns[1]),
-          Math.floor(columns[2]),
-          Math.floor(columns[3]),
-          Math.floor(columns[4]),
-          Math.floor(columns[5]),
-          Math.floor(columns[6]),
-          Math.floor(columns[7]),
-          Math.floor(columns[8]),
-          Math.floor(columns[9]),
-          Math.floor(columns[10])
+          Math.floor(Number(columns[0])),
+          Math.floor(Number(columns[1])),
+          Math.floor(Number(columns[2])),
+          Math.floor(Number(columns[3])),
+          Math.floor(Number(columns[4])),
+          Math.floor(Number(columns[5])),
+          Math.floor(Number(columns[6])),
+          Math.floor(Number(columns[7])),
+          Math.floor(Number(columns[8])),
+          Math.floor(Number(columns[9])),
+          Math.floor(Number(columns[10]))
         ]);
       } else {
         var buhin = this.kBuhin.search(columns[7]);
         if (buhin != "") {
           strokesArray = strokesArray.concat(this.getEachStrokesOfBuhin(buhin,
-            Math.floor(columns[3]),
-            Math.floor(columns[4]),
-            Math.floor(columns[5]),
-            Math.floor(columns[6]),
-            Math.floor(columns[1]),
-            Math.floor(columns[2]),
-            Math.floor(columns[9]),
-            Math.floor(columns[10]))
+            Math.floor(Number(columns[3])),
+            Math.floor(Number(columns[4])),
+            Math.floor(Number(columns[5])),
+            Math.floor(Number(columns[6])),
+            Math.floor(Number(columns[1])),
+            Math.floor(Number(columns[2])),
+            Math.floor(Number(columns[9])),
+            Math.floor(Number(columns[10])))
           );
         }
       }
     }
     return strokesArray;
   }
+  /**
+   * @param {string} buhin
+   * @param {number} x1
+   * @param {number} y1
+   * @param {number} x2
+   * @param {number} y2
+   * @param {number} sx
+   * @param {number} sy
+   * @param {number} sx2
+   * @param {number} sy2
+   */
   getEachStrokesOfBuhin(buhin, x1, y1, x2, y2, sx, sy, sx2, sy2) {
     var temp = this.getEachStrokes(buhin);
     var result = new Array();
@@ -165,6 +191,9 @@ class Kage {
     }
     return result;
   }
+  /**
+   * @param {number[][]} sa
+   */
   adjustHane(sa) {
     for (var i = 0; i < sa.length; i++) {
       if ((sa[i][0] == 1 || sa[i][0] == 2 || sa[i][0] == 6) && sa[i][2] == 4) {
@@ -198,6 +227,9 @@ class Kage {
     }
     return sa;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustUroko(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if (strokesArray[i][0] == 1 && strokesArray[i][2] == 0) { // no operation for TATE
@@ -224,6 +256,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustUroko2(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if (strokesArray[i][0] == 1 && strokesArray[i][2] == 0 && strokesArray[i][4] == strokesArray[i][6]) {
@@ -248,6 +283,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustTate(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if ((strokesArray[i][0] == 1 || strokesArray[i][0] == 3 || strokesArray[i][0] == 7) && strokesArray[i][3] == strokesArray[i][5]) {
@@ -265,6 +303,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustMage(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if ((strokesArray[i][0] == 3) && strokesArray[i][6] == strokesArray[i][8]) {
@@ -287,6 +328,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustKirikuchi(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if (strokesArray[i][0] == 2 && strokesArray[i][1] == 32 &&
@@ -304,6 +348,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokesArray
+   */
   adjustKakato(strokesArray) {
     for (var i = 0; i < strokesArray.length; i++) {
       if (strokesArray[i][0] == 1 &&
@@ -325,6 +372,9 @@ class Kage {
     }
     return strokesArray;
   }
+  /**
+   * @param {number[][]} strokes
+   */
   getBox(strokes) {
     var a = {
       minX: 200,
@@ -359,6 +409,13 @@ class Kage {
     }
     return a;
   }
+  /**
+   * @param {number} dp
+   * @param {number} sp
+   * @param {number} p
+   * @param {number} min
+   * @param {number} max
+   */
   stretch(dp, sp, p, min, max) {
     var p1, p2, p3, p4;
     if (p < sp + 100) {
@@ -383,6 +440,20 @@ exports.Kage = Kage;
 
 // kagecd
 
+/**
+ * @param {Kage} kage
+ * @param {Polygons} polygons
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} sx1
+ * @param {number} sy1
+ * @param {number} sx2
+ * @param {number} sy2
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} ta1
+ * @param {number} ta2
+ */
 function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, ta2) {
   var rad, t;
   var x, y, v;
@@ -504,13 +575,13 @@ function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, t
         kage2.kKakato = kage.kKakato;
         kage2.kRate = 10;
 
-        var curve = new Array(2); // L and R
+        var curve = /** @type {[[number, number][], [number, number][]]} */ (new Array(2)); // L and R
         get_candidate(kage2, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4);
 
-        var dcl12_34 = new Array(2);
-        var dcr12_34 = new Array(2);
-        var dpl12_34 = new Array(2);
-        var dpr12_34 = new Array(2);
+        var dcl12_34 = /** @type {[[number, number][], [number, number][]]} */ (new Array(2));
+        var dcr12_34 = /** @type {[[number, number][], [number, number][]]} */ (new Array(2));
+        var dpl12_34 = /** @type {[number[], number[]]} */ (new Array(2));
+        var dpr12_34 = /** @type {[number[], number[]]} */ (new Array(2));
         divide_curve(kage2, x1, y1, sx1, sy1, x2, y2, curve[0], dcl12_34, dpl12_34);
         divide_curve(kage2, x1, y1, sx1, sy1, x2, y2, curve[1], dcr12_34, dpr12_34);
 
@@ -1187,16 +1258,52 @@ function cdDrawCurveU(kage, polygons, x1, y1, sx1, sy1, sx2, sy2, x2, y2, ta1, t
 }
 exports.cdDrawCurveU = cdDrawCurveU;
 
+/**
+ * @param {Kage} kage
+ * @param {Polygons} polygons
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} x3
+ * @param {number} y3
+ * @param {number} x4
+ * @param {number} y4
+ * @param {number} a1
+ * @param {number} a2
+ */
 function cdDrawBezier(kage, polygons, x1, y1, x2, y2, x3, y3, x4, y4, a1, a2) {
   cdDrawCurveU(kage, polygons, x1, y1, x2, y2, x3, y3, x4, y4, a1, a2);
 }
 exports.cdDrawBezier = cdDrawBezier;
 
+/**
+ * @param {Kage} kage
+ * @param {Polygons} polygons
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} x3
+ * @param {number} y3
+ * @param {number} a1
+ * @param {number} a2
+ */
 function cdDrawCurve(kage, polygons, x1, y1, x2, y2, x3, y3, a1, a2) {
   cdDrawCurveU(kage, polygons, x1, y1, x2, y2, x2, y2, x3, y3, a1, a2);
 }
 exports.cdDrawCurve = cdDrawCurve;
 
+/**
+ * @param {Kage} kage
+ * @param {Polygons} polygons
+ * @param {number} tx1
+ * @param {number} ty1
+ * @param {number} tx2
+ * @param {number} ty2
+ * @param {number} ta1
+ * @param {number} ta2
+ */
 function cdDrawLine(kage, polygons, tx1, ty1, tx2, ty2, ta1, ta2) {
   var rad;
   var v, x1, y1, x2, y2;
@@ -1727,6 +1834,21 @@ exports.cdDrawLine = cdDrawLine;
 
 // kagedf
 
+/**
+ * @param {Kage} kage
+ * @param {Polygons} polygons
+ * @param {number} a1
+ * @param {number} a2
+ * @param {number} a3
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} x3
+ * @param {number} y3
+ * @param {number} x4
+ * @param {number} y4
+ */
 function dfDrawFont(kage, polygons, a1, a2, a3, x1, y1, x2, y2, x3, y3, x4, y4) {
   var tx1, tx2, tx3, tx4, ty1, ty2, ty3, ty4, v;
   var rad;

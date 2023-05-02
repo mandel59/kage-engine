@@ -1,3 +1,15 @@
+/**
+ * @param {import("./kage").Kage} kage
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} sx1
+ * @param {number} sy1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {[number, number][]} curve
+ * @param {[[number, number][], [number, number][]]} div_curve
+ * @param {[number[], number[]]} off_curve
+ */
 function divide_curve(kage, x1, y1, sx1, sy1, x2, y2, curve, div_curve, off_curve) {
   var rate = 0.5;
   var cut = Math.floor(curve.length * rate);
@@ -39,6 +51,13 @@ function divide_curve(kage, x1, y1, sx1, sy1, x2, y2, curve, div_curve, off_curv
 exports.divide_curve = divide_curve
 
 // ------------------------------------------------------------------
+/**
+ * @param {import("./kage").Kage} kage
+ * @param {[number, number][]} curve
+ * @param {number} sx
+ * @param {number} sy
+ * @param {number[]} result
+ */
 function find_offcurve(kage, curve, sx, sy, result) {
   var nx1, ny1, nx2, ny2, tx, ty;
   var minx, miny, count, diff;
@@ -127,6 +146,20 @@ function find_offcurve(kage, curve, sx, sy, result) {
 exports.find_offcurve = find_offcurve;
 
 // ------------------------------------------------------------------
+/**
+ * @param {import("./kage").Kage} kage
+ * @param {[[number, number][], [number, number][]]} curve
+ * @param {number} a1
+ * @param {number} a2
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} sx1
+ * @param {number} sy1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} opt3
+ * @param {number} opt4
+ */
 function get_candidate(kage, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4) {
   var x, y, ix, iy, ir, ia, ib, tt, t, deltad;
   var hosomi = 0.5;
@@ -185,14 +218,8 @@ function get_candidate(kage, curve, a1, a2, x1, y1, sx1, sy1, x2, y2, opt3, opt4
       ib = ib * -1;
     }
 
-    var temp = new Array(2);
-    temp[0] = x - ia;
-    temp[1] = y - ib;
-    curve[0].push(temp);
-    temp = new Array(2);
-    temp[0] = x + ia;
-    temp[1] = y + ib;
-    curve[1].push(temp);
+    curve[0].push([x - ia, y - ib]);
+    curve[1].push([x + ia, y + ib]);
   }
 }
 exports.get_candidate = get_candidate;

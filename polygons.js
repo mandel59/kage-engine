@@ -9,6 +9,9 @@ class Polygons {
   clear() {
     this.array = new Array();
   }
+  /**
+   * @param {import("./polygon").Polygon} polygon
+   */
   push(polygon) {
     // only a simple check
     var minx = 200;
@@ -49,6 +52,9 @@ class Polygons {
       }
     }
   }
+  /**
+   * @param {boolean} curve
+   */
   generateSVG(curve) {
     var buffer = "";
     buffer += "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" baseProfile=\"full\" viewBox=\"0 0 200 200\" width=\"200\" height=\"200\">\n";

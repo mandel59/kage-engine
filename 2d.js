@@ -1,6 +1,10 @@
 // Reference : http://www.cam.hi-ho.ne.jp/strong_warriors/teacher/chapter0{4,5}.html
 
 class Point {
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -8,6 +12,16 @@ class Point {
 }
 exports.Point = Point;
 
+/**
+ * @param {number} x11
+ * @param {number} y11
+ * @param {number} x12
+ * @param {number} y12
+ * @param {number} x21
+ * @param {number} y21
+ * @param {number} x22
+ * @param {number} y22
+ */
 function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
   var a1 = y12 - y11;
   var b1 = x11 - x12;
@@ -24,6 +38,16 @@ function getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22) { // point
 }
 exports.getCrossPoint = getCrossPoint;
 
+/**
+ * @param {number} x11
+ * @param {number} y11
+ * @param {number} x12
+ * @param {number} y12
+ * @param {number} x21
+ * @param {number} y21
+ * @param {number} x22
+ * @param {number} y22
+ */
 function isCross(x11, y11, x12, y12, x21, y21, x22, y22) { // boolean
   var temp = getCrossPoint(x11, y11, x12, y12, x21, y21, x22, y22);
   if (!temp) { return false; }
@@ -45,6 +69,16 @@ function isCross(x11, y11, x12, y12, x21, y21, x22, y22) { // boolean
 }
 exports.isCross = isCross;
 
+/**
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} bx1
+ * @param {number} by1
+ * @param {number} bx2
+ * @param {number} by2
+ */
 function isCrossBox(x1, y1, x2, y2, bx1, by1, bx2, by2) { // boolean
   if (isCross(x1, y1, x2, y2, bx1, by1, bx2, by1)) { return true; }
   if (isCross(x1, y1, x2, y2, bx2, by1, bx2, by2)) { return true; }
@@ -53,6 +87,14 @@ function isCrossBox(x1, y1, x2, y2, bx1, by1, bx2, by2) { // boolean
   return false;
 }
 
+/**
+ * @param {number[][]} strokesArray
+ * @param {number} i
+ * @param {number} bx1
+ * @param {number} by1
+ * @param {number} bx2
+ * @param {number} by2
+ */
 function isCrossBoxWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
   for (var j = 0; j < strokesArray.length; j++) {
     if (i == j) { continue; }
@@ -95,6 +137,14 @@ function isCrossBoxWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
 }
 exports.isCrossBoxWithOthers = isCrossBoxWithOthers;
 
+/**
+ * @param {number[][]} strokesArray
+ * @param {number} i
+ * @param {number} bx1
+ * @param {number} by1
+ * @param {number} bx2
+ * @param {number} by2
+ */
 function isCrossWithOthers(strokesArray, i, bx1, by1, bx2, by2) { // boolean
   for (var j = 0; j < strokesArray.length; j++) {
     if (i == j) { continue; }

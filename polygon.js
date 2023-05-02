@@ -1,4 +1,7 @@
 class Polygon {
+  /**
+   * @param {number} [number]
+   */
   constructor(number) {
     // resolution : 0.1
     // property
@@ -14,6 +17,11 @@ class Polygon {
     return this;
   }
   // method
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} [off]
+   */
   push(x, y, off) {
     var temp = {
       x: Math.floor(x * 10) / 10,
@@ -25,6 +33,12 @@ class Polygon {
     temp.off = off;
     this.array.push(temp);
   }
+  /**
+   * @param {number} index
+   * @param {number} x
+   * @param {number} y
+   * @param {number} [off]
+   */
   set(index, x, y, off) {
     this.array[index].x = Math.floor(x * 10) / 10;
     this.array[index].y = Math.floor(y * 10) / 10;
@@ -36,12 +50,20 @@ class Polygon {
   reverse() {
     this.array.reverse();
   }
+  /**
+   * @param {Polygon} poly
+   */
   concat(poly) {
     this.array = this.array.concat(poly.array);
   }
   shift() {
     this.array.shift();
   }
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} [off]
+   */
   unshift(x, y, off) {
     var temp = {
       x: Math.floor(x * 10) / 10,
