@@ -12,6 +12,6 @@ kage.glyph("u26c29-02").setData("1:0:0:76:34:188:34$1:0:0:113:13:113:53$1:0:0:15
 
 const polygons = kage.glyph("u6f22").polygons();
 console.log(polygons.generateSVG({
-    fill: "black",
-    background: "white",
+  fill: "black",
+  background: "white",
 }));
