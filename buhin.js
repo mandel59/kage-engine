@@ -25,6 +25,12 @@ class Buhin {
     this.hash[name] = data;
   }
   /**
+   * @param {string} name 
+   */
+  has(name) {
+    return name in this.hash;
+  }
+  /**
    * @param {string} name
    */
   search(name) {

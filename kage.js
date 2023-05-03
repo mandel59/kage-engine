@@ -198,6 +198,13 @@ class Kage {
     return buhinNotFound;
   }
   /**
+   * Visit all buhin.
+   * The result is stored in visited.
+   * visited[name] is true if the buhin is found.
+   * visited[name] is false if the buhin is not found.
+   * visited[name] is null if the buhin is invalid.
+   * Invalid buhin is buhin that has infinite loop or that is empty.
+   *
    * @param {string} name
    * @param {Record<string, boolean | null>} visited
    */
@@ -206,9 +213,12 @@ class Kage {
       return;
     }
     visited[name] = null;
+    if (!this.kBuhin.has(name)) {
+      visited[name] = false;
+      return;
+    }
     var glyphData = this.kBuhin.search(name);
     if (!glyphData) {
-      visited[name] = false;
       return;
     }
     var strokes = glyphData.split("$");
