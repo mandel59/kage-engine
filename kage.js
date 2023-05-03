@@ -102,13 +102,35 @@ class Kage {
   }
   /**
    * @param {string} glyphData
+   *  Glyph data.
+   * @param {string} [name]
+   *  Name of the glyph. Used for memoization.
+   * @param {Record<string, number[][]>} [visited]
+   *  Memoized data. Also used for preventing infinite loop.
    * @returns {number[][]}
    */
-  getEachStrokes(glyphData) {
+  getEachStrokes(glyphData, name, visited) {
+    if (name == null) {
+      name = "";
+    }
+    if (visited == null) {
+      visited = { __proto__: null };
+    }
+    if (name in visited) {
+      return visited[name];
+    }
+    // Set empty array to prevent infinite loop.
+    // This array will be overwritten later.
+    visited[name] = [];
+
+    // Split glyph data into strokes.
     var strokesArray = new Array();
     var strokes = glyphData.split("$");
+
     for (var i = 0; i < strokes.length; i++) {
       var columns = strokes[i].split(":");
+      // Check if the stroke is a reference.
+      // If not, add the stroke to the array.
       if (Math.floor(Number(columns[0])) != 99) {
         strokesArray.push([
           Math.floor(Number(columns[0])),
@@ -124,21 +146,28 @@ class Kage {
           Math.floor(Number(columns[10]))
         ]);
       } else {
+        // Get KAGE data of reference.
         var buhin = this.kBuhin.search(columns[7]);
         if (buhin != "") {
-          strokesArray = strokesArray.concat(this.getEachStrokesOfBuhin(buhin,
-            Math.floor(Number(columns[3])),
-            Math.floor(Number(columns[4])),
-            Math.floor(Number(columns[5])),
-            Math.floor(Number(columns[6])),
-            Math.floor(Number(columns[1])),
-            Math.floor(Number(columns[2])),
-            Math.floor(Number(columns[9])),
-            Math.floor(Number(columns[10])))
+          // Add strokes of reference to the array.
+          strokesArray = strokesArray.concat(
+            this.getEachStrokesOfBuhin(buhin,
+              Math.floor(Number(columns[3])),
+              Math.floor(Number(columns[4])),
+              Math.floor(Number(columns[5])),
+              Math.floor(Number(columns[6])),
+              Math.floor(Number(columns[1])),
+              Math.floor(Number(columns[2])),
+              Math.floor(Number(columns[9])),
+              Math.floor(Number(columns[10])),
+              columns[7],
+              visited
+            )
           );
         }
       }
     }
+    visited[name] = strokesArray;
     return strokesArray;
   }
   /**
@@ -151,9 +180,26 @@ class Kage {
    * @param {number} sy
    * @param {number} sx2
    * @param {number} sy2
+   * @param {string} [name]
+   * @param {Record<string, number[][]>} [visited]
    */
-  getEachStrokesOfBuhin(buhin, x1, y1, x2, y2, sx, sy, sx2, sy2) {
-    var temp = this.getEachStrokes(buhin);
+  getEachStrokesOfBuhin(buhin, x1, y1, x2, y2, sx, sy, sx2, sy2, name, visited) {
+    var temp = this.getEachStrokes(buhin, name, visited);
+    return this.stretchBuhin(temp, x1, y1, x2, y2, sx, sy, sx2, sy2);
+  }
+  /**
+   * @param {number[][]} buhinStrokes
+   * @param {number} x1
+   * @param {number} y1
+   * @param {number} x2
+   * @param {number} y2
+   * @param {number} sx
+   * @param {number} sy
+   * @param {number} sx2
+   * @param {number} sy2
+   */
+  stretchBuhin(buhinStrokes, x1, y1, x2, y2, sx, sy, sx2, sy2) {
+    var temp = buhinStrokes;
     var result = new Array();
     var box = this.getBox(temp);
     if (sx != 0 || sy != 0) {
