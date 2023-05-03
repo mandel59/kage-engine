@@ -216,12 +216,10 @@ class Kage {
         temp[i][4] = this.stretch(sy, sy2, temp[i][4], box.minY, box.maxY);
         temp[i][5] = this.stretch(sx, sx2, temp[i][5], box.minX, box.maxX);
         temp[i][6] = this.stretch(sy, sy2, temp[i][6], box.minY, box.maxY);
-        if (temp[i][0] != 99) {
-          temp[i][7] = this.stretch(sx, sx2, temp[i][7], box.minX, box.maxX);
-          temp[i][8] = this.stretch(sy, sy2, temp[i][8], box.minY, box.maxY);
-          temp[i][9] = this.stretch(sx, sx2, temp[i][9], box.minX, box.maxX);
-          temp[i][10] = this.stretch(sy, sy2, temp[i][10], box.minY, box.maxY);
-        }
+        temp[i][7] = this.stretch(sx, sx2, temp[i][7], box.minX, box.maxX);
+        temp[i][8] = this.stretch(sy, sy2, temp[i][8], box.minY, box.maxY);
+        temp[i][9] = this.stretch(sx, sx2, temp[i][9], box.minX, box.maxX);
+        temp[i][10] = this.stretch(sy, sy2, temp[i][10], box.minY, box.maxY);
       }
       result.push([temp[i][0],
       temp[i][1],
