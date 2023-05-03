@@ -171,6 +171,56 @@ class Kage {
     return strokesArray;
   }
   /**
+   * @param {string} name
+   */
+  getAllBuhin(name) {
+    const visited = { __proto__: null };
+    const buhin = [];
+    this.visitAllBuhin(name, visited);
+    for (const key in visited) {
+      buhin.push(key);
+    }
+    return buhin;
+  }
+  /**
+   * @param {string} name
+   */
+  getAllBuhinNotFound(name) {
+    /** @type {Record<string, boolean | null>} */
+    const visited = { __proto__: null };
+    const buhinNotFound = [];
+    this.visitAllBuhin(name, visited);
+    for (const key in visited) {
+      if (visited[key] === false) {
+        buhinNotFound.push(key);
+      }
+    }
+    return buhinNotFound;
+  }
+  /**
+   * @param {string} name
+   * @param {Record<string, boolean | null>} visited
+   */
+  visitAllBuhin(name, visited) {
+    if (name in visited) {
+      return;
+    }
+    visited[name] = null;
+    var glyphData = this.kBuhin.search(name);
+    if (!glyphData) {
+      visited[name] = false;
+      return;
+    }
+    var strokes = glyphData.split("$");
+    for (var i = 0; i < strokes.length; i++) {
+      var columns = strokes[i].split(":");
+      if (Math.floor(Number(columns[0])) == 99) {
+        this.visitAllBuhin(columns[7], visited);
+      }
+    }
+    visited[name] = true;
+  }
+  /**
    * @param {string} buhin
    * @param {number} x1
    * @param {number} y1
@@ -515,6 +565,12 @@ class Glyph {
     const polygons = new Polygons();
     this.kage.makeGlyph(polygons, this.name);
     return polygons;
+  }
+  components() {
+    return this.kage.getAllBuhin(this.name);
+  }
+  componentsNotFound() {
+    return this.kage.getAllBuhinNotFound(this.name);
   }
 }
 exports.Glyph = Glyph
