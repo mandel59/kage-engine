@@ -14,4 +14,7 @@ kage.kBuhin.push("u26c29-02", "1:0:0:76:34:188:34$1:0:0:113:13:113:53$1:0:0:151:
 
 kage.makeGlyph(polygons, "u6f22");
 
-console.log(polygons.generateSVG(false));
+console.log(polygons.generateSVG({
+    fill: "black",
+    background: "white",
+}));
