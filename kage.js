@@ -75,29 +75,38 @@ class Kage {
    */
   makeGlyph(polygons, buhin) {
     var glyphData = this.kBuhin.search(buhin);
-    this.makeGlyph2(polygons, glyphData);
+    this.makeGlyphFromKage(polygons, glyphData, buhin);
   }
   /**
    * @param {Polygons} polygons
    * @param {string} data
-   */
-  makeGlyph2(polygons, data) {
+   * @param {string} [name]
+  */
+  makeGlyphFromKage(polygons, data, name) {
     if (data != "") {
-      var strokesArray = this.adjustKirikuchi(this.adjustUroko2(this.adjustUroko(this.adjustKakato(this.adjustTate(this.adjustMage(this.adjustHane(this.getEachStrokes(data))))))));
-      for (var i = 0; i < strokesArray.length; i++) {
-        dfDrawFont(this, polygons,
-          strokesArray[i][0],
-          strokesArray[i][1],
-          strokesArray[i][2],
-          strokesArray[i][3],
-          strokesArray[i][4],
-          strokesArray[i][5],
-          strokesArray[i][6],
-          strokesArray[i][7],
-          strokesArray[i][8],
-          strokesArray[i][9],
-          strokesArray[i][10]);
-      }
+      const strokes = this.getEachStrokes(data, name);
+      this.makeGlyphFromStrokes(polygons, strokes);
+    }
+  }
+  /**
+   * @param {Polygons} polygons
+   * @param {number[][]} strokes
+   */
+  makeGlyphFromStrokes(polygons, strokes) {
+    var strokesArray = this.adjustKirikuchi(this.adjustUroko2(this.adjustUroko(this.adjustKakato(this.adjustTate(this.adjustMage(this.adjustHane(strokes)))))));
+    for (var i = 0; i < strokesArray.length; i++) {
+      dfDrawFont(this, polygons,
+        strokesArray[i][0],
+        strokesArray[i][1],
+        strokesArray[i][2],
+        strokesArray[i][3],
+        strokesArray[i][4],
+        strokesArray[i][5],
+        strokesArray[i][6],
+        strokesArray[i][7],
+        strokesArray[i][8],
+        strokesArray[i][9],
+        strokesArray[i][10]);
     }
   }
   /**
@@ -581,6 +590,17 @@ class Glyph {
   }
   componentsNotFound() {
     return this.kage.getAllBuhinNotFound(this.name);
+  }
+  strokes() {
+    const data = this.getData()
+    if (!data) {
+      return [];
+    }
+    return this.kage.getEachStrokes(data, this.name).map(function (stroke) {
+      return stroke.filter(function (value) {
+        return !Number.isNaN(value);
+      });
+  });
   }
 }
 exports.Glyph = Glyph
