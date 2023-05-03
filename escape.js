@@ -3,6 +3,6 @@
  * @param {string} s 
  */
 function escapeXMLAttribute(s) {
-    return s.replace("&", "&amp;").replace('"', "&quot;");
+  return s.replace("&", "&amp;").replace('"', "&quot;");
 }
 exports.escapeXMLAttribute = escapeXMLAttribute;
