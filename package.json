@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mandel59/kage-engine/issues"
   },
-  "homepage": "https://github.com/mandel59/kage-engine#readme"
+  "homepage": "https://github.com/mandel59/kage-engine#readme",
+  "devDependencies": {
+    "@types/node": "^18.16.3"
+  }
 }
