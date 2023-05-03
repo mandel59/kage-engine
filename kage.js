@@ -431,12 +431,49 @@ class Kage {
     }
     return Math.floor(((p - p1) / (p2 - p1)) * (p4 - p3) + p3);
   }
+  /**
+   * Get a Glyph object of name.
+   * @param {string} name
+   */
+  glyph(name) {
+    return new Glyph(this, name);
+  }
 }
 
 Kage.prototype.kMincho = 0;
 Kage.prototype.kGothic = 1;
 
 exports.Kage = Kage;
+
+class Glyph {
+  /**
+   * @param {Kage} kage
+   * @param {string} name
+   */
+  constructor(kage, name) {
+    this.kage = kage;
+    this.name = name;
+  }
+  /**
+   * Set KAGE data to glyph.
+   * @param {string} data 
+   */
+  setData(data) {
+    this.kage.kBuhin.push(this.name, data);
+  }
+  /**
+   * Get KAGE data of glyph.
+   */
+  getData() {
+    return this.kage.kBuhin.search(this.name) || undefined;
+  }
+  polygons() {
+    const polygons = new Polygons();
+    this.kage.makeGlyph(polygons, this.name);
+    return polygons;
+  }
+}
+exports.Glyph = Glyph
 
 // kagecd
 
