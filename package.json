@@ -2,7 +2,7 @@
   "name": "@mandel59/kage-engine",
   "version": "1.0.0",
   "description": "Kanji-glyph Automatic Generating Engine",
-  "main": "index.js",
+  "main": "kage.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
